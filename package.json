@@ -1,6 +1,6 @@
 {
   "name": "shortcuts",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A simple JavaScript module (ESM) for handling keyboard shortcuts, either globals or attached to DOM elements",
   "main": "index.js",
   "module": "index.js",
