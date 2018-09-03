@@ -2,13 +2,13 @@
 
 /**
  *  @LostInBrittany/shorcuts
- * 
+ *
  *  A simple JavaScript module (ESM) for handling keyboard shortcuts, either globals or attached to DOM elements"
- *  @license MIT 
+ *  @license MIT
  *  @author Horacio Gonzalez <horacio.gonzalez@gmail.com>
- * 
+ *
  * Inspired by Shortcuts (https://github.com/rickellis/shortcuts) by
- * 
+ *
  */
 
 
@@ -48,7 +48,7 @@ let keycodes = {
   107: '+',
   109: '-',
   110: '.',
-  111 : '/',
+  111: '/',
   186: ';',
   187: '=',
   188: ',',
@@ -59,8 +59,8 @@ let keycodes = {
   219: '[',
   220: '\\',
   221: ']',
-  222: '\''
-}
+  222: '\'',
+};
 
 
 let shortcuts = {
@@ -68,9 +68,8 @@ let shortcuts = {
   shortcutExists: {},
 
   add: (shortcut, callback, options) => {
-
     let eventType = 'keydown';
-    let element = document;
+    let element = document.body;
 
     if (typeof options === 'string') {
       eventType = options;
@@ -83,13 +82,13 @@ let shortcuts = {
     if (typeof options == 'object' && options.element) {
       element = options.element;
     }
-    
+
     if (typeof options == 'object' && options.eventType) {
       element = options.eventType;
     }
 
     // Prevents multiple additions of the same shortcut
-    if (shortcuts.shortcutExists[shortcut] === true 
+    if (shortcuts.shortcutExists[shortcut] === true
         && shortcuts.shortcutExists[shortcut][eventType] === true) {
       return;
     }
@@ -98,7 +97,7 @@ let shortcuts = {
       let event = evt || window.event;
       let keypress = (event.keyCode) ? event.keyCode : event.which;
       let keyvalue = String.fromCharCode(keypress).toLowerCase();
-    
+
       let shortcutFragments = shortcut.split('+');
 
       let metaPressed = {
@@ -106,7 +105,7 @@ let shortcuts = {
         'ctrl': event.ctrlKey,
         'shift': event.shiftKey,
         'alt': event.altKey,
-      }
+      };
 
       let matches = shortcutFragments
         .filter((fragment) => {
@@ -137,7 +136,7 @@ let shortcuts = {
     // Add the event listener
     element.addEventListener(eventType, keyTracker);
 
-    // Cache the event data so it can be removed later    
+    // Cache the event data so it can be removed later
     if (!shortcuts.eventTracker[shortcut]) {
       shortcuts.eventTracker[shortcut] = {};
     }
@@ -163,8 +162,8 @@ let shortcuts = {
         delete (shortcuts.eventTracker[shortcut][eventType]);
         shortcuts.shortcutExists[shortcut][eventType] = false;
     }
-  }
-}
+  },
+};
 
 export { shortcuts };
 export default shortcuts;

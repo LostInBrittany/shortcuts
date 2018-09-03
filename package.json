@@ -1,6 +1,6 @@
 {
-  "name": "@LostInBrittany/shortcuts",
-  "version": "1.0.0",
+  "name": "@lostinbrittany/shortcuts",
+  "version": "1.0.1",
   "description": "A simple JavaScript module (ESM) for handling keyboard shortcuts, either globals or attached to DOM elements",
   "main": "index.js",
   "module": "index.js",
