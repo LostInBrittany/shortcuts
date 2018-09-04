@@ -129,7 +129,7 @@ let shortcuts = {
         .length;
 
       if (matches == shortcutFragments.length) {
-        callback();
+        callback(evt);
       }
     };
 
