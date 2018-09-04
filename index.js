@@ -62,6 +62,40 @@ let keycodes = {
   222: '\'',
 };
 
+let  characterFromEvent = (evt) => {
+
+  // for keypress events we should return the character as is
+  if (evt.type == 'keypress') {
+      let character = String.fromCharCode(evt.which);
+
+      // if the shift key is not pressed then it is safe to assume
+      // that we want the character to be lowercase.  this means if
+      // you accidentally have caps lock on then your key bindings
+      // will continue to work
+      //
+      // the only side effect that might not be desired is if you
+      // bind something like 'A' cause you want to trigger an
+      // event when capital A is pressed caps lock will no longer
+      // trigger the event.  shift+a will though.
+      if (!evt.shiftKey) {
+          character = character.toLowerCase();
+      }
+
+      return character;
+  }
+
+  // for non keypress events the special maps are needed
+  if (keycodes[evt.which]) {
+      return keycodes[evt.which];
+  }
+
+  // if it is not in the special map
+
+  // with keydown and keyup events the character seems to always
+  // come in as an uppercase character whether you are pressing shift
+  // or not.  we should make sure it is always lowercase for comparisons
+  return String.fromCharCode(evt.which).toLowerCase();
+}
 
 let shortcuts = {
   eventTracker: {},
@@ -87,16 +121,18 @@ let shortcuts = {
       element = options.eventType;
     }
 
+
     // Prevents multiple additions of the same shortcut
     if (shortcuts.shortcutExists[shortcut] === true
         && shortcuts.shortcutExists[shortcut][eventType] === true) {
       return;
     }
 
+
     let keyTracker = (evt) => {
       let event = evt || window.event;
       let keypress = (event.keyCode) ? event.keyCode : event.which;
-      let keyvalue = String.fromCharCode(keypress).toLowerCase();
+      let keyvalue = characterFromEvent(evt);
 
       let shortcutFragments = shortcut.split('+');
 
@@ -127,7 +163,6 @@ let shortcuts = {
           return (fragment === keyvalue);
         })
         .length;
-
       if (matches == shortcutFragments.length) {
         callback(evt);
       }
