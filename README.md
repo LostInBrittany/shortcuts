@@ -1,8 +1,10 @@
-Shortcuts is a simple JavaScript module (ESM) for handling keyboard shortcuts, either globals or attached to DOM elements.
+Shortcuts (`@lostinbrittany/shortcuts`) is a simple JavaScript module (ESM) for handling keyboard shortcuts, either globals or attached to DOM elements.
 
 It's licenced under MIT licence.
 
 Shortcuts is a tiny library, less than 200 lines of code, weighting 4 kB before minification. It has support for keypress, keydown, and keyup events on specific keys, keyboard combinations, or key sequences.
+
+> `@lostinbrittany/shortcuts` is heavily inspired by the great [Shortcuts](https://github.com/rickellis/Shortcuts) lib, with some bits of [Mousetrap](https://github.com/ccampbell/mousetrap) and [Keypress](http://dmauro.github.io/Keypress/)
 
 
 ## Getting started
